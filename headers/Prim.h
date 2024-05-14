@@ -3,7 +3,7 @@
 
 class Prim : public LevelGenerator {
 public:
-	Prim();
+	Prim() : LevelGenerator() {};
 	Prim(unsigned int roomSize, unsigned int seed) : LevelGenerator(roomSize, seed) {};
-	virtual std::vector<std::pair<int, int>>& Algorithm() override;
+	virtual std::vector<bool>& Algorithm() override;
 };

@@ -1,12 +1,6 @@
 #include "Prim.h"
 
-Prim::Prim() {
-	seed = 0;
-	roomSize = 0;
-	roomSizeSqr = 0;
-}
-
-std::vector<std::pair<int, int>>& Prim::Algorithm() {
+std::vector<bool>& Prim::Algorithm() {
 	if (graph.empty())
 		GetRandomGraph();
 	int edgeNum = 0;
@@ -36,7 +30,7 @@ std::vector<std::pair<int, int>>& Prim::Algorithm() {
 			}
 		}
 
-		resultGraph.push_back(std::make_pair(x, y));
+		DeleteWall(x, y);
 		selected[y] = true;
 		edgeNum++;
 	}

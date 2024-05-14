@@ -1,8 +1,8 @@
 #pragma once
 
+#include <iostream>
 #include "vector"
 #include <random>
-#include <utility>
 
 class LevelGenerator {
 protected:
@@ -10,21 +10,20 @@ protected:
 	unsigned int roomSize;
 	unsigned int roomSizeSqr;
 	std::vector<std::vector<int>> graph;
-	std::vector<std::pair<int, int>> resultGraph;
+	std::vector<bool> resultGraph;
 	std::mt19937 rng;
 
 public:
-	LevelGenerator() {};
-	LevelGenerator(unsigned int roomSize, unsigned int seed) : seed(seed), roomSize(roomSize), roomSizeSqr(roomSize* roomSize), rng(seed) {}
+	LevelGenerator() : seed(0), roomSize(0), roomSizeSqr(0), rng(seed) {}
+	LevelGenerator(unsigned int roomSize, unsigned int seed) : seed(seed), roomSize(roomSize), roomSizeSqr(roomSize* roomSize), rng(seed) {
+		resultGraph.resize(roomSizeSqr * roomSizeSqr, true);
+	}
 	virtual ~LevelGenerator() {};
 
-	virtual std::vector<std::pair<int, int>>& Algorithm() = 0;
+	virtual std::vector<bool>& Algorithm() = 0;
 	virtual void GetRandomGraph() {
 		int dif = 0;
-		graph.resize(roomSizeSqr);
-
-		for (int i = 0; i < roomSizeSqr; ++i)
-			graph[i].resize(roomSizeSqr);
+		graph.resize(roomSizeSqr, std::vector<int>(roomSizeSqr));
 
 		for (int i = 0; i < roomSizeSqr; ++i) {
 			for (int j = 0; j < roomSizeSqr; ++j) {
@@ -43,5 +42,15 @@ public:
 				}
 			}
 		}
+	}
+
+	inline bool IsValid(int x, int y) const {
+		return (x >= 0 && x < roomSizeSqr) && (y >= 0 && y < roomSizeSqr);
+	}
+
+	inline void DeleteWall(int x, int y) {
+		std::cout << x << " " << y << std::endl;
+		resultGraph[x * roomSizeSqr + y] = false;
+		resultGraph[y * roomSizeSqr + x] = false;
 	}
 };
