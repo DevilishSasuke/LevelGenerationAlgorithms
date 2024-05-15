@@ -15,8 +15,9 @@ protected:
 
 public:
 	LevelGenerator() : seed(0), roomSize(0), roomSizeSqr(0), rng(seed) {}
-	LevelGenerator(unsigned int roomSize, unsigned int seed) : seed(seed), roomSize(roomSize), roomSizeSqr(roomSize* roomSize), rng(seed) {
-		resultGraph.resize(roomSizeSqr * roomSizeSqr, true);
+	LevelGenerator(unsigned int roomSize, unsigned int seed) : LevelGenerator(roomSize, seed, false) {};
+	LevelGenerator(unsigned int roomSize, unsigned int seed, bool initValue) : seed(seed), roomSize(roomSize), roomSizeSqr(roomSize* roomSize), rng(seed) {
+		resultGraph.resize(roomSizeSqr * roomSizeSqr);
 	}
 	virtual ~LevelGenerator() {};
 
