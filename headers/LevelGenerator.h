@@ -15,9 +15,9 @@ protected:
 
 public:
 	LevelGenerator() : seed(0), roomSize(0), roomSizeSqr(0), rng(seed) {}
-	LevelGenerator(unsigned int roomSize, unsigned int seed) : LevelGenerator(roomSize, seed, false) {};
+	LevelGenerator(unsigned int roomSize, unsigned int seed) : LevelGenerator(roomSize, seed, true) {};
 	LevelGenerator(unsigned int roomSize, unsigned int seed, bool initValue) : seed(seed), roomSize(roomSize), roomSizeSqr(roomSize* roomSize), rng(seed) {
-		resultGraph.resize(roomSizeSqr * roomSizeSqr);
+		resultGraph.resize(roomSizeSqr * roomSizeSqr, initValue);
 	}
 	virtual ~LevelGenerator() {};
 
@@ -49,8 +49,14 @@ public:
 		return (x >= 0 && x < roomSizeSqr) && (y >= 0 && y < roomSizeSqr);
 	}
 
+	inline void SetWall(int x, int y) {
+		std::cout << "Setted: " << x << " " << y << std::endl;
+		resultGraph[x * roomSizeSqr + y] = true;
+		resultGraph[y * roomSizeSqr + x] = true;
+	}
+
 	inline void DeleteWall(int x, int y) {
-		std::cout << x << " " << y << std::endl;
+		std::cout << "Deleted: " << x << " " << y << std::endl;
 		resultGraph[x * roomSizeSqr + y] = false;
 		resultGraph[y * roomSizeSqr + x] = false;
 	}
