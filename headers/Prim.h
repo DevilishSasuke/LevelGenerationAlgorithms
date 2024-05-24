@@ -1,4 +1,5 @@
 #pragma once
+
 #include "LevelGenerator.h"
 
 class Prim : public LevelGenerator {

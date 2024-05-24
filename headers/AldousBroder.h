@@ -1,4 +1,5 @@
 #pragma once
+
 #include "LevelGenerator.h"
 
 class AldousBroder : public LevelGenerator {
