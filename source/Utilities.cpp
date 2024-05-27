@@ -5,7 +5,7 @@ int Randomize(std::mt19937& gen, int min, int max) {
 	return min + gen() % (max - min + 1);
 }
 
-std::vector<std::vector<int>>& GetRandomGraph(int roomSize, std::mt19937& gen) {
+std::vector<std::vector<int>> GetRandomGraph(int roomSize, std::mt19937& gen) {
 	unsigned int roomSizeSqr = roomSize * roomSize;
 	std::vector<std::vector<int>> graph(roomSizeSqr, std::vector<int>(roomSizeSqr));
 	int dif = 0;

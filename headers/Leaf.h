@@ -22,10 +22,7 @@ public:
 
 	Leaf() : x(0), y(0), width(0), height(0) {};
 	Leaf(int x, int y, int width, int height, std::mt19937 generator) : x(x), y(y), width(width), height(height), rng(generator) {};
-	~Leaf() {
-		delete leftChild;
-		delete rightChild;
-	}
+	~Leaf() {}
 
 	bool Split();
 	void CreateRooms(int roomSize);

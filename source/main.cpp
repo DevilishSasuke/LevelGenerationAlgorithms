@@ -7,12 +7,17 @@
 
 int main()
 {
-	unsigned int roomSize = 11;
+	unsigned int roomSize = 50;
 	unsigned int seed = 1;
-	
-	for (int i = 0; i < 100; i++) {
-		auto algo = BSPTree(30, i);
-		std::vector<bool> list = algo.Algorithm();
-		std::cout << std::endl;
-	}
+	int roomSizeSqr = roomSize * roomSize;
+
+
+	auto algo = BSPTree(roomSize, seed);
+	std::vector<bool> list = algo.Algorithm();
+
+	/*for (int i = 0; i < list.size(); ++i) {
+		if (list[i]) {
+			std::cout << i / roomSizeSqr << " " << i % roomSizeSqr << std::endl;
+		}
+	}*/
 } 
